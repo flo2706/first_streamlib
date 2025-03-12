@@ -43,7 +43,7 @@ fig = px.choropleth(
     hover_name="countriesAndTerritories",
     color_continuous_scale="Reds",
     projection="orthographic",
-    title="Total COVID Cases in Europe",
+ 
 )
 
 fig.update_geos(
@@ -64,12 +64,11 @@ fig.update_layout(
 
 st.plotly_chart(fig, use_container_width=False)
 
-st.subheader("📈 Daily COVID Cases in Europe")
+st.subheader("📈 Daily New COVID Cases in Europe")
 daily_cases = data.groupby("dateRep")[["cases"]].sum().reset_index()
 fig = px.line(
     daily_cases, x="dateRep", y="cases",
     labels={"dateRep": "Date", "cases": "Daily Cases"},
-    title="Daily New COVID Cases in Europe",
     markers=True
 )
 
@@ -87,7 +86,6 @@ fig = px.scatter(
     cases_deaths, x="cases", y="deaths",
     size="cases", color="cases",
     hover_name="countriesAndTerritories",
-    title="COVID Cases vs Deaths by Country",
     log_x=True, log_y=True
 )
 
@@ -106,7 +104,6 @@ top_countries = total_cases_by_country.sort_values(by="cases", ascending=False).
 fig = px.bar(
     top_countries, x="cases", y="countriesAndTerritories",
     orientation="h", color="cases",
-    title="Top 10 Most Affected Countries",
     labels={"cases": "Total Cases", "countriesAndTerritories": "Country"},
 )
 
